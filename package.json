@@ -1,13 +1,19 @@
 {
   "name": "grunt-remotehosting",
   "version": "0.0.1",
+  "private:": true,
   "description": "Grunt task to help with remote hosting",
   "main": "index.js",
   "dependencies": {
     "grunt": "~0.4.2",
     "grunt-rsync": "^0.3.0",
     "grunt-ssh": "^0.10.0",
-    "grunt-template": "^0.2.3"
+    "grunt-template": "^0.2.3",
+    "grunt-release": "^0.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bitsoflove/grunt-remotehosting.git"
   },
   "author": "Bits of Love",
   "license": "MIT"
