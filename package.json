@@ -1,6 +1,6 @@
 {
   "name": "grunt-remotehosting",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private:": true,
   "description": "Grunt task to help with remote hosting",
   "main": "index.js",
