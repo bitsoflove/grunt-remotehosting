@@ -1,8 +1,8 @@
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-rsync');
-  grunt.loadNpmTasks('grunt-ssh');
-  grunt.loadNpmTasks('grunt-template');
+  grunt.loadTasks(__dirname + "/../node_modules/grunt-rsync/tasks")
+  grunt.loadTasks(__dirname + "/../node_modules/grunt-ssh/tasks")
+  grunt.loadTasks(__dirname + "/../node_modules/grunt-template/tasks");
 
   grunt.registerTask('remotehosting', 'Deploy to remotehosting', function(n) {
     var remotehostingConfig = grunt.option('remotehosting-config');
