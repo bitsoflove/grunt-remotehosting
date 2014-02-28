@@ -9,6 +9,6 @@
     "grunt-ssh": "^0.10.0",
     "grunt-template": "^0.2.3"
   },
-  "author": "Patrick Debois",
+  "author": "Bits of Love",
   "license": "MIT"
 }
