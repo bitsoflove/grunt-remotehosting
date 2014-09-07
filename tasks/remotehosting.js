@@ -25,9 +25,6 @@ module.exports = function(grunt) {
       jsonConfig.ssh.privateKey=privateKey;
     }
 
-    /* read remote deploy folder - defaults to /www */
-    jsonConfig.deployFolder = (jsonConfig.deployFolder === '')?'/www':jsonConfig.deployFolder;
-
     /* read the settings */
     grunt.config.set('remotehosting',jsonConfig);
 
