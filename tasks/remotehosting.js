@@ -25,6 +25,9 @@ module.exports = function(grunt) {
       jsonConfig.ssh.privateKey=privateKey;
     }
 
+    /* read remote deploy folder - defaults to /www */
+    jsonConfig.deployFolder = (jsonConfig.deployFolder === '')?'/www':jsonConfig.deployFolder;
+
     /* read the settings */
     grunt.config.set('remotehosting',jsonConfig);
 
@@ -41,7 +44,7 @@ module.exports = function(grunt) {
           args: ["-avz","--super"],
           src: "project/",
           exclude: [
-            ".git*", 
+            ".git*",
             // "config/"  // we need it in production
           ],
           dest: "remotehosting-build/www",
@@ -56,7 +59,7 @@ module.exports = function(grunt) {
           src: "remotehosting-build/www/",
           syncDestIgnoreExcl: true, // Delete files on remote that don't exist local
           exclude: ["cache/"], // But don't remove these directories
-          dest: "<%= remotehosting.remotePath %>/www",
+          dest: "<%= remotehosting.remotePath %><%= remotehosting.deployFolder %>",
           host: "<%= remotehosting.ssh.username + '@' + remotehosting.ssh.hostname %>",
         }
       }
