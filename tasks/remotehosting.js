@@ -69,15 +69,16 @@ module.exports = function(grunt) {
     /* prepare the SSH Exec options */
     sshexecOptions = {
       run_prepare_remotehosting_sh: {
-        command: 'chmod +x prepare_remotehosting.sh && ./prepare_remotehosting.sh',
+        command: 'chmod +x '+'<%= remotehosting.remotePath %>/' + 'prepare_remotehosting.sh && '+'<%= remotehosting.remotePath %>'+'/prepare_remotehosting.sh',
         options: {
           host: '<%= remotehosting.ssh.hostname %>',
           username: '<%= remotehosting.ssh.username %>',
-          password: '<%= remotehosting.ssh.password %>'
+          password: '<%= remotehosting.ssh.password %>',
+          privateKey: '<%= remotehosting.ssh.privateKey %>'
         }
       },
       remove_prepare_remotehosting_sh: {
-        command: 'rm ./prepare_remotehosting.sh',
+        command: 'rm '+ '<%= remotehosting.remotePath %>/' + './prepare_remotehosting.sh',
         options: {
           host: '<%= remotehosting.ssh.hostname %>',
           username: '<%= remotehosting.ssh.username %>',
@@ -101,7 +102,7 @@ module.exports = function(grunt) {
           host: '<%= remotehosting.ssh.hostname %>',
           username: '<%= remotehosting.ssh.username %>',
           password: '<%= remotehosting.ssh.password %>',
-          privateKey: '<%= remotehosting.ssh.privateKey %>'
+          privateKey: '<%= remotehosting.ssh.privateKey %>',
           showProgress: true
         },
       },
