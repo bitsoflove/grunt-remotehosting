@@ -15,7 +15,18 @@ module.exports = function(grunt) {
     }
 
     /* read the settings */
-    grunt.config.set('remotehosting',grunt.file.readJSON(remotehostingConfig));
+    var jsonConfig = grunt.file.readJSON(remotehostingConfig);
+
+    /* read private key */
+    var privateKeyFile=jsonConfig.ssh.privateKeyFile;
+    var privateKey;
+    if (privateKeyFile) {
+      privateKey=grunt.file.read(privateKeyFile);
+      jsonConfig.ssh.privateKey=privateKey;
+    }
+
+    /* read the settings */
+    grunt.config.set('remotehosting',jsonConfig);
 
     // Create our build directory
     grunt.file.mkdir("remotehosting-build");
@@ -70,7 +81,8 @@ module.exports = function(grunt) {
         options: {
           host: '<%= remotehosting.ssh.hostname %>',
           username: '<%= remotehosting.ssh.username %>',
-          password: '<%= remotehosting.ssh.password %>'
+          password: '<%= remotehosting.ssh.password %>',
+          privateKey: '<%= remotehosting.ssh.privateKey %>'
         }
       }
     }
@@ -89,6 +101,7 @@ module.exports = function(grunt) {
           host: '<%= remotehosting.ssh.hostname %>',
           username: '<%= remotehosting.ssh.username %>',
           password: '<%= remotehosting.ssh.password %>',
+          privateKey: '<%= remotehosting.ssh.privateKey %>'
           showProgress: true
         },
       },
