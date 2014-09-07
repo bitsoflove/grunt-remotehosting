@@ -26,6 +26,7 @@ This grunt automates the copying of files to a remotehosting and will execute a 
 ```json
 {
   "remotePath": "<remote directory location of your files>",
+  "deployFolder": "<remote deploy folder of your files - can be empty>",
   "ssh": {
     "username": "<your ssh user>",
     "password": "<your ssh password>",
@@ -43,4 +44,4 @@ This grunt automates the copying of files to a remotehosting and will execute a 
 - the local files are located in `project` directory
 - the remote script is located in `deploy/prepare_remotehosting.sh`
 - it can ssh & sftp using the same credentials
-- the remote hosting directory is in `www`
+- the remote hosting directory is defined through remotePath + deployFolder
