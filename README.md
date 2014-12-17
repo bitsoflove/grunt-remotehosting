@@ -36,9 +36,14 @@ This grunt automates the copying of files to a remotehosting and will execute a 
     "username": "<your mysql user>",
     "password": "<your mysql password>",
     "hostname": "<your mysql host>"
+  },
+  "rsync": {
+    "exclude": ["<Array of files and folders you want to exclude from the rsync. (so they don't get deleted on remote)>"]  
   }
 }
 ```
+
+  [http://www.samba.org/ftp/rsync/rsync.html](Rsync exclude patterns) (search for `INCLUDE/EXCLUDE PATTERN RULES`)
 
 # (current)Assumptions
 - the local files are located in `project` directory
