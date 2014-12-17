@@ -55,7 +55,7 @@ module.exports = function(grunt) {
           compareMode: 'checksum', // On remotehosting times don't get synched, so we use checksum
           src: "remotehosting-build/www/",
           syncDestIgnoreExcl: true, // Delete files on remote that don't exist local
-          exclude: ["cache/"], // But don't remove these directories
+          exclude: ["cache/", "app/Bitsoflove/Config/", "project/app/Bitsoflove/Config/"], // But don't remove these directories
           dest: "<%= remotehosting.remotePath %><%= remotehosting.deployFolder %>",
           host: "<%= remotehosting.ssh.username + '@' + remotehosting.ssh.hostname %>",
         }
