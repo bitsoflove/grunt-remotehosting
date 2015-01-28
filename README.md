@@ -25,7 +25,7 @@ This grunt automates the copying of files to a remotehosting and will execute a 
 
 ```json
 {
-  "remotePath": "<remote directory location of your files>",
+  "remotePath": "<remote directory location of yourd files>",
   "deployFolder": "<remote deploy folder of your files - can be empty>",
   "ssh": {
     "username": "<your ssh user>",
@@ -43,7 +43,8 @@ This grunt automates the copying of files to a remotehosting and will execute a 
 }
 ```
 
-  [http://www.samba.org/ftp/rsync/rsync.html](Rsync exclude patterns) (search for `INCLUDE/EXCLUDE PATTERN RULES`)
+  [Rsync exclude patterns](http://www.samba.org/ftp/rsync/rsync.html) (search for `INCLUDE/EXCLUDE PATTERN RULES`)
+In a typical Laravel project you start within the "project" folder, so don't include it in your relative path.
 
 # (current)Assumptions
 - the local files are located in `project` directory
