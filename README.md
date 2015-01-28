@@ -43,7 +43,8 @@ This grunt automates the copying of files to a remotehosting and will execute a 
 }
 ```
 
-  [Rsync exclude patterns](http://www.samba.org/ftp/rsync/rsync.html) (search for `INCLUDE/EXCLUDE PATTERN RULES`)
+[Rsync exclude patterns](http://www.samba.org/ftp/rsync/rsync.html) (search for `INCLUDE/EXCLUDE PATTERN RULES`)
+  
 In a typical Laravel project you start within the "project" folder, so don't include it in your relative path.
 
 # (current)Assumptions
