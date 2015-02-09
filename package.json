@@ -7,7 +7,7 @@
   "dependencies": {
     "grunt": "~0.4.2",
     "grunt-rsync": "~0.3.0",
-    "grunt-ssh": "~0.10.0",
+    "grunt-ssh": "~0.12.1",
     "grunt-template": "~0.2.3",
     "grunt-release": "~0.7.0"
   },
