@@ -17,6 +17,8 @@ module.exports = function(grunt) {
     /* read the settings */
     var jsonConfig = grunt.file.readJSON(remotehostingConfig);
 
+    jsonConfig.environment = jsonConfig.environment || '';
+
     /* read private key */
     var privateKeyFile=jsonConfig.ssh.privateKeyFile;
     var privateKey;
@@ -73,7 +75,7 @@ module.exports = function(grunt) {
     /* prepare the SSH Exec options */
     sshexecOptions = {
       run_prepare_remotehosting_sh: {
-        command: 'chmod +x '+'<%= remotehosting.remotePath %>/' + 'prepare_remotehosting.sh && '+'<%= remotehosting.remotePath %>'+'/prepare_remotehosting.sh',
+        command: 'chmod +x <%= remotehosting.remotePath %>/prepare_remotehosting.sh && cd <%= remotehosting.remotePath %> && <%= remotehosting.remotePath %>/prepare_remotehosting.sh <%= remotehosting.environment %> ',
         options: {
           host: '<%= remotehosting.ssh.hostname %>',
           username: '<%= remotehosting.ssh.username %>',
