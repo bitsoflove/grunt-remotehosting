@@ -17,6 +17,9 @@ module.exports = function (grunt) {
         /* read the settings */
         var jsonConfig = grunt.file.readJSON(remotehostingConfig);
 
+        jsonConfig.environment = jsonConfig.environment || "";
+        jsonConfig.maintenanceEnabled = jsonConfig.maintenanceEnabled  || false;
+
         /* read private key */
         var privateKeyFile = jsonConfig.ssh.privateKeyFile;
         var privateKey;
@@ -32,8 +35,12 @@ module.exports = function (grunt) {
         grunt.file.mkdir("remotehosting-build");
 
 
-        var rsyncDefaultExclude = ["cache/"];
-        var rsyncExclude = jsonConfig.rsync && jsonConfig.rsync.exclude || rsyncDefaultExclude;
+
+
+        var rsyncDefaultExclude = ["cache/","app/storage/meta/down"];
+        var rsyncExclude = jsonConfig.rsync && jsonConfig.rsync.exclude || [];
+        rsyncExclude = rsyncExclude.concat(rsyncDefaultExclude);
+
 
         /* prepare the RSYNC options */
         rsyncOptions = {
@@ -122,17 +129,17 @@ module.exports = function (grunt) {
         /* Task sequence to run */
         grunt.task.run('rsync:remotehosting_build_local');
 
-        if (jsonConfig.environment.toLowerCase() === "production") {
+        if (jsonConfig.maintenanceEnabled) {
             grunt.task.run('sshexec:run_artisan_down');
         }
-
 
         grunt.task.run('rsync:remotehosting_remote_rsync');
 
         grunt.task.run('sftp:prepare_remotehosting_sh');
         grunt.task.run('sshexec:run_prepare_remotehosting_sh');
         grunt.task.run('sshexec:remove_prepare_remotehosting_sh');
-        if (jsonConfig.environment.toLowerCase() === "production") {
+
+        if (jsonConfig.maintenanceEnabled) {
             grunt.task.run('sshexec:run_artisan_up');
         }
 
