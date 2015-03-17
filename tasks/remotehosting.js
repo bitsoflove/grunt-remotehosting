@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 
 
 
-        var rsyncDefaultExclude = ["cache/","app/storage/***/*.*","storage/***/*.*"];
+        var rsyncDefaultExclude = ["cache/","storage/*.*","storage/***/*.*"];
         var rsyncExclude = jsonConfig.rsync && jsonConfig.rsync.exclude || [];
         rsyncExclude = rsyncExclude.concat(rsyncDefaultExclude);
 
