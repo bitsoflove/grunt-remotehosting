@@ -42,6 +42,8 @@ module.exports = function (grunt) {
         rsyncExclude = rsyncExclude.concat(rsyncDefaultExclude);
 
 
+        var rsyncArgs = jsonConfig.rsync && jsonConfig.rsync.args || [];
+        
         /* prepare the RSYNC options */
         rsyncOptions = {
             options: {
@@ -61,7 +63,7 @@ module.exports = function (grunt) {
             },
             remotehosting_remote_rsync: { // Copies build to remote remotehosting but ignores certain files
                 options: {
-                    args: ["-vz", "--super"],
+                    args: ["-vz", "--super"].concat(rsyncArgs),
                     ssh: true,
                     compareMode: 'checksum', // On remotehosting times don't get synched, so we use checksum
                     src: "remotehosting-build/www/",
