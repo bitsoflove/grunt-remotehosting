@@ -93,10 +93,10 @@ module.exports = function (grunt) {
             
         if (jsonConfig.customCommands) {
             if(jsonConfig.customCommands.pre) {
-                customCommandsPre = jsonConfig.customCommands.pre;
+                customCommandsPre = [].concat(jsonConfig.customCommands.pre);
             }   
             if(jsonConfig.customCommands.post) {
-                customCommandsPost = jsonConfig.customCommands.post;
+                customCommandsPost = [].concat(jsonConfig.customCommands.post);
             }   
         }
 
@@ -119,11 +119,11 @@ module.exports = function (grunt) {
                 options: sshConnectionOptions
             },
             run_custom_commands_pre: {
-                command: ['cd <%= remotehosting.remotePath %>', 'pwd'].concat(customCommandsPre),
+                command: customCommandsPre.map(function(x){return 'cd <%= remotehosting.remotePath %> && ' + x;}),
                 options: sshConnectionOptions
             },
             run_custom_commands_post: {
-                command: ['cd <%= remotehosting.remotePath %>', 'pwd'].concat(customCommandsPost),
+                command: customCommandsPost.map(function(x){return 'cd <%= remotehosting.remotePath %> && ' + x;}),
                 options: sshConnectionOptions
             }
         }
