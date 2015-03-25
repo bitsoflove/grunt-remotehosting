@@ -19,6 +19,7 @@ module.exports = function (grunt) {
 
         jsonConfig.environment = jsonConfig.environment || "";
         jsonConfig.maintenanceEnabled = jsonConfig.maintenanceEnabled  || false;
+        jsonConfig.chmodDisabled = jsonConfig.chmodDisabled  || false;
 
         /* read private key */
         var privateKeyFile = jsonConfig.ssh.privateKeyFile;
@@ -85,6 +86,19 @@ module.exports = function (grunt) {
             password: '<%= remotehosting.ssh.password %>',
             privateKey: '<%= remotehosting.ssh.privateKey %>'
         };
+        
+        
+        var customCommandsPre = [],
+            customCommandsPost = [];
+            
+        if (jsonConfig.customCommands) {
+            if(jsonConfig.customCommands.pre) {
+                customCommandsPre = jsonConfig.customCommands.pre;
+            }   
+            if(jsonConfig.customCommands.post) {
+                customCommandsPost = jsonConfig.customCommands.post;
+            }   
+        }
 
         /* prepare the SSH Exec options */
         sshexecOptions = {
@@ -102,6 +116,14 @@ module.exports = function (grunt) {
             },
             run_artisan_down: {
                 command: 'cd <%= remotehosting.remotePath %> && php artisan down',
+                options: sshConnectionOptions
+            },
+            run_custom_commands_pre: {
+                command: customCommandsPre,
+                options: sshConnectionOptions
+            },
+            run_custom_commands_post: {
+                command: customCommandsPost,
                 options: sshConnectionOptions
             }
         }
@@ -134,12 +156,24 @@ module.exports = function (grunt) {
         if (jsonConfig.maintenanceEnabled) {
             grunt.task.run('sshexec:run_artisan_down');
         }
+        
+        if (customCommandsPre.length) {
+            grunt.task.run('sshexec:run_custom_commands_pre');
+        }
 
         grunt.task.run('rsync:remotehosting_remote_rsync');
-
+        
         grunt.task.run('sftp:prepare_remotehosting_sh');
-        grunt.task.run('sshexec:run_prepare_remotehosting_sh');
+        
+        if (!jsonConfig.chmodDisabled) {
+            grunt.task.run('sshexec:run_prepare_remotehosting_sh');
+        }
+        
         grunt.task.run('sshexec:remove_prepare_remotehosting_sh');
+        
+        if (customCommandsPost.length) {
+            grunt.task.run('sshexec:run_custom_commands_post');
+        }
 
         if (jsonConfig.maintenanceEnabled) {
             grunt.task.run('sshexec:run_artisan_up');
