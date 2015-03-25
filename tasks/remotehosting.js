@@ -119,11 +119,11 @@ module.exports = function (grunt) {
                 options: sshConnectionOptions
             },
             run_custom_commands_pre: {
-                command: customCommandsPre,
+                command: ['cd <%= remotehosting.remotePath %>'].concat(customCommandsPre),
                 options: sshConnectionOptions
             },
             run_custom_commands_post: {
-                command: customCommandsPost,
+                command: ['cd <%= remotehosting.remotePath %>'].concat(customCommandsPost),
                 options: sshConnectionOptions
             }
         }
