@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 
 
 
-        var rsyncDefaultExclude = ["cache/","storage/*.*","storage/***/*.*", "app/storage/***/*.*", "app/storage/meta/down"];
+        var rsyncDefaultExclude = ["node_modules", "cache/","storage/*.*","storage/***/*.*", "app/storage/***/*.*", "app/storage/meta/down"];
         var rsyncExclude = jsonConfig.rsync && jsonConfig.rsync.exclude || [];
         rsyncExclude = rsyncExclude.concat(rsyncDefaultExclude);
 
@@ -56,6 +56,7 @@ module.exports = function (grunt) {
                     src: "project/",
                     exclude: [
                         ".git*",
+                        "node_modules"
                         // "config/"  // we need it in production
                     ],
                     dest: "remotehosting-build/www",
