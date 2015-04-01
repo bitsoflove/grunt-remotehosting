@@ -52,7 +52,7 @@ module.exports = function (grunt) {
             },
             remotehosting_build_local: {
                 options: {
-                    args: ["-avz", "--super"],
+                    args: ["-az", "--super"],
                     src: "project/",
                     exclude: [
                         ".git*",
