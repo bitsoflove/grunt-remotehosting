@@ -34,7 +34,7 @@ module.exports = function (grunt) {
 
         // Create our build directory
         grunt.file.mkdir("remotehosting-build");
-        grunt.file.mkdir("logs");
+        grunt.file.mkdir("$CIRCLE_ARTIFACTS/logs");
 
 
 
@@ -53,7 +53,7 @@ module.exports = function (grunt) {
             },
             remotehosting_build_local: {
                 options: {
-                    args: ["-az", "--super", "--log-file=logs/rsync_local.log"],
+                    args: ["-az", "--super", "--log-file=$CIRCLE_ARTIFACTS/logs/rsync_local.log"],
                     src: "project/",
                     exclude: [
                         ".git*",
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
             },
             remotehosting_remote_rsync: { // Copies build to remote remotehosting but ignores certain files
                 options: {
-                    args: ["-z", "--super", "--log-file=logs/rsync_remote.log"].concat(rsyncArgs),
+                    args: ["-z", "--super", "--log-file=$CIRCLE_ARTIFACTS/logs/rsync_remote.log"].concat(rsyncArgs),
                     ssh: true,
                     compareMode: 'checksum', // On remotehosting times don't get synched, so we use checksum
                     src: "remotehosting-build/www/",
