@@ -45,6 +45,7 @@ module.exports = function (grunt) {
 
 
         var rsyncArgs = jsonConfig.rsync && jsonConfig.rsync.args || [];
+        var remotePort = jsonConfig.rsync && jsonConfig.rsync.port || 22;
         
         /* prepare the RSYNC options */
         rsyncOptions = {
@@ -74,6 +75,7 @@ module.exports = function (grunt) {
                     exclude: rsyncExclude, // But don't remove these directories
                     dest: "<%= remotehosting.remotePath %><%= remotehosting.deployFolder %>",
                     host: "<%= remotehosting.ssh.username + '@' + remotehosting.ssh.hostname %>",
+                    port: remotePort
                 }
             }
         }
