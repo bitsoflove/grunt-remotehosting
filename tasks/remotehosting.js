@@ -45,7 +45,7 @@ module.exports = function (grunt) {
 
 
         var rsyncArgs = jsonConfig.rsync && jsonConfig.rsync.args || [];
-        var remotePort = jsonConfig.rsync && jsonConfig.rsync.port || 22;
+        var remotePort = jsonConfig.ssh && jsonConfig.ssh.port || 22;
         
         /* prepare the RSYNC options */
         rsyncOptions = {
