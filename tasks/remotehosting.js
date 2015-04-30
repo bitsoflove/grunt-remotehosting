@@ -88,7 +88,8 @@ module.exports = function (grunt) {
             host: '<%= remotehosting.ssh.hostname %>',
             username: '<%= remotehosting.ssh.username %>',
             password: '<%= remotehosting.ssh.password %>',
-            privateKey: '<%= remotehosting.ssh.privateKey %>'
+            privateKey: '<%= remotehosting.ssh.privateKey %>',
+            port: remotePort
         };
         
         
@@ -147,6 +148,7 @@ module.exports = function (grunt) {
                     username: '<%= remotehosting.ssh.username %>',
                     password: '<%= remotehosting.ssh.password %>',
                     privateKey: '<%= remotehosting.ssh.privateKey %>',
+                    port: remortePort,
                     showProgress: true
                 },
             },
