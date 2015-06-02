@@ -43,19 +43,21 @@ module.exports = function (grunt) {
         var rsyncExclude = jsonConfig.rsync && jsonConfig.rsync.exclude || [];
         rsyncExclude = rsyncExclude.concat(rsyncDefaultExclude);
 
+        var localPath = jsonConfig.localPath || 'project';
+
 
         var rsyncArgs = jsonConfig.rsync && jsonConfig.rsync.args || [];
         var remotePort = jsonConfig.ssh && jsonConfig.ssh.port || 22;
         
         /* prepare the RSYNC options */
-        rsyncOptions = {
+        var rsyncOptions = {
             options: {
                 recursive: true
             },
             remotehosting_build_local: {
                 options: {
                     args: ["-az", "--super", "--log-file=$CIRCLE_ARTIFACTS/logs/rsync_local.log"],
-                    src: "project/",
+                    src: localPath + "/",
                     exclude: [
                         ".git*",
                         "node_modules"
