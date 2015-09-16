@@ -48,6 +48,7 @@ module.exports = function (grunt) {
 
         var rsyncArgs = jsonConfig.rsync && jsonConfig.rsync.args || [];
         var remotePort = jsonConfig.ssh && jsonConfig.ssh.port || 22;
+        var readyTimeout = jsonConfig.ssh && jsonConfig.ssh.readyTimeout || 40000;
         
         /* prepare the RSYNC options */
         var rsyncOptions = {
@@ -85,13 +86,14 @@ module.exports = function (grunt) {
         grunt.config.set('rsync', rsyncOptions);
 
         //grunt.config.set('template',templateOptions);
-
+        
         var sshConnectionOptions = {
             host: '<%= remotehosting.ssh.hostname %>',
             username: '<%= remotehosting.ssh.username %>',
             password: '<%= remotehosting.ssh.password %>',
             privateKey: '<%= remotehosting.ssh.privateKey %>',
-            port: remotePort
+            port: remotePort,
+            readyTimeout: readyTimeout
         };
         
         
@@ -151,7 +153,8 @@ module.exports = function (grunt) {
                     password: '<%= remotehosting.ssh.password %>',
                     privateKey: '<%= remotehosting.ssh.privateKey %>',
                     port: remotePort,
-                    showProgress: true
+                    showProgress: true,
+                    readyTimeout: readyTimeout
                 },
             },
         };
