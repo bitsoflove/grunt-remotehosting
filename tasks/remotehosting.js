@@ -174,13 +174,15 @@ module.exports = function (grunt) {
 
         grunt.task.run('rsync:remotehosting_remote_rsync');
         
-        grunt.task.run('sftp:prepare_remotehosting_sh');
+        
         
         if (!jsonConfig.chmodDisabled) {
+            grunt.task.run('sftp:prepare_remotehosting_sh');
             grunt.task.run('sshexec:run_prepare_remotehosting_sh');
+            grunt.task.run('sshexec:remove_prepare_remotehosting_sh');
         }
         
-        grunt.task.run('sshexec:remove_prepare_remotehosting_sh');
+        
         
         if (customCommandsPost.length) {
             grunt.task.run('sshexec:run_custom_commands_post');
