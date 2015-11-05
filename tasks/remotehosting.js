@@ -150,7 +150,7 @@ module.exports = function (grunt) {
                 },
                 options: {
                     srcBasePath: 'deploy',
-                    path: sftpConfig.path || '<%= remotehosting.remotePath %>',
+                    path: typeof sftpConfig.path !== 'undefined' ? sftpConfig.path : '<%= remotehosting.remotePath %>',
                     host: '<%= remotehosting.ssh.hostname %>',
                     username: '<%= remotehosting.ssh.username %>',
                     password: '<%= remotehosting.ssh.password %>',
