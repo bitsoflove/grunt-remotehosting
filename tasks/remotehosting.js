@@ -138,6 +138,9 @@ module.exports = function (grunt) {
         }
 
         grunt.config.set('sshexec', sshexecOptions);
+        
+        
+        var sftpConfig = jsonConfig.sftp || {};
 
         /* prepare the SfTP Exec options */
         sftpOptions = {
@@ -147,7 +150,7 @@ module.exports = function (grunt) {
                 },
                 options: {
                     srcBasePath: 'deploy',
-                    path: '<%= remotehosting.remotePath %>',
+                    path: sftpConfig.path || '<%= remotehosting.remotePath %>',
                     host: '<%= remotehosting.ssh.hostname %>',
                     username: '<%= remotehosting.ssh.username %>',
                     password: '<%= remotehosting.ssh.password %>',
