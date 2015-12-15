@@ -112,7 +112,7 @@ module.exports = function (grunt) {
         /* prepare the SSH Exec options */
         sshexecOptions = {
             run_prepare_remotehosting_sh: {
-                command: 'chmod +x <%= remotehosting.remotePath %>/prepare_remotehosting.sh && cd <%= remotehosting.remotePath %> && <%= remotehosting.remotePath %>/prepare_remotehosting.sh <%= remotehosting.environment %> ',
+                command: 'chmod +x <%= remotehosting.remotePath %>/prepare_remotehosting.sh && cd <%= remotehosting.remotePath %> && ./prepare_remotehosting.sh <%= remotehosting.environment %> ',
                 options: sshConnectionOptions
             },
             remove_prepare_remotehosting_sh: {
